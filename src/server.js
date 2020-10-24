@@ -1,5 +1,6 @@
 import sirv from 'sirv';
 import express from 'express';
+import bodyParser from 'body-parser';
 import compression from 'compression';
 import * as sapper from '@sapper/server';
 
@@ -9,6 +10,7 @@ const dev = NODE_ENV === 'development';
 express()
 	.use(
 		compression({ threshold: 0 }),
+		bodyParser.json(),
 		sirv('static', { dev }),
 		sapper.middleware()
 	)
