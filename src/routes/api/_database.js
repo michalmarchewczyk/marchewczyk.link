@@ -33,12 +33,17 @@ const ShortURL = new mongoose.Schema({
     url: {
         type: String,
         required: [true, 'url is required'],
+        set: (v) => {
+            if(!validator.isURL(v)) return v;
+            const r = new RegExp('^(?:[a-z]+:)?//', 'i');
+            return r.test(v) ? v : `http://${v}`;
+        },
         validate: {
             validator: (v) => {
                 return validator.isURL(v);
             },
             message: props => `${props.value} is not a valid url`,
-        }
+        },
     },
     date: { type: Date, default: Date.now },
 });
