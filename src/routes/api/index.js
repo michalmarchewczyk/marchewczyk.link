@@ -16,7 +16,7 @@ export function post(req, res) {
             if(err.errors){
                 msgs = [...msgs, ...Object.values(err.errors).map(e => e.properties.message)];
             }
-            res.status(409);
+            res.status(400);
             res.json({messages: msgs,});
             return;
         }

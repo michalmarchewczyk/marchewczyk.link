@@ -1,4 +1,5 @@
 <script>
+	import AddForm from '../components/AddForm.svelte';
 
 </script>
 
@@ -11,3 +12,6 @@
 </svelte:head>
 
 
+<div class='container'>
+	<AddForm/>
+</div>
