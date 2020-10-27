@@ -24,3 +24,9 @@ export function post(req, res) {
         res.json(newURL);
     });
 }
+
+
+export function get(req, res) {
+    res.status(400);
+    res.end();
+}

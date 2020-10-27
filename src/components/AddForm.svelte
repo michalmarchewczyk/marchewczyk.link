@@ -30,8 +30,6 @@
         msgTimeout = setTimeout(() => {
             message = {type: null, msg: 'null'}
         }, 10000);
-
-        console.log(resData);
     }
 </script>
 
