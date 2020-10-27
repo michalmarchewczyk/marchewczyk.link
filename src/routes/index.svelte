@@ -1,25 +1,30 @@
 <script>
-	import AddForm from '../components/AddForm.svelte';
-	import GetForm from '../components/GetForm.svelte';
+    import AddForm from '../components/AddForm.svelte';
+    import GetForm from '../components/GetForm.svelte';
+    import NavBar from '../components/NavBar.svelte';
 
-	let view = 'add';
-
+    let view = 'add';
 </script>
 
-<style>
+<style lang='scss'>
 
 </style>
 
 <svelte:head>
-	<title>URL Shortener</title>
+    <title>URL Shortener</title>
 </svelte:head>
 
-<nav>
-	<button on:click={() => view = 'add'}>Create</button>
-	<button on:click={() => view = 'get'}>Search</button>
-</nav>
+<NavBar views={[
+		{name: 'add', text: 'Create'},
+		{name: 'get', text: 'Search'},
+		]}
+        bind:view={view}/>
 
 <div class='container'>
-	{#if view==='add'}<AddForm/>{/if}
-	{#if view==='get'}<GetForm/>{/if}
+    {#if view === 'add'}
+        <AddForm/>
+    {/if}
+    {#if view === 'get'}
+        <GetForm/>
+    {/if}
 </div>
