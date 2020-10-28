@@ -38,7 +38,6 @@
     display: block;
     position: relative;
     margin: 2em auto;
-    //outline: 1px solid blue;
     width: 28em;
     max-width: calc(100vw - 4em);
 
@@ -268,10 +267,11 @@
 {#if message.type}
     <div class='msg' transition:fade={{duration: 100}} class:msgError={message.type==='error'}>
         {#if message.type === 'error'}
-            <span>Error</span><span> {message.msg}</span>
+            <span>Error</span>
+            <span>{message.msg}</span>
         {:else if message.type === 'success'}
-            <span>Success </span><span>Link: <a
-                    href={`http://${window.location.host}/${message.msg}`}>{window.location.host}/{message.msg}</a></span>
+            <span>Success</span>
+            <span>Link: <a href={`http://${window.location.host}/${message.msg}`}>{window.location.host}/{message.msg}</a></span>
         {/if}
     </div>
 {/if}

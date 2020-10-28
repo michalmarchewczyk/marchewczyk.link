@@ -20,8 +20,8 @@
       display: inline-block;
       position: relative;
       height: 3em;
-      width: 14em;
-      margin-left: 0.6em;
+      width: 13em;
+      margin-left: 0.2em;
       text-decoration: none;
 
       img {
@@ -43,14 +43,23 @@
         font-weight: 600;
         left: 2.6em;
         span {
-          color: #999999;
+          color: #888888;
+          transition: color 0.05s linear;
+        }
+      }
+
+      &:hover {
+        span.logo_text {
+          span {
+            color: white;
+          }
         }
       }
     }
 
     div{
       float: right;
-      margin-right: 1em;
+      margin-right: 0.4em;
       margin-top: 0.65em;
       button {
         display: inline-block;
