@@ -7,7 +7,12 @@
 </script>
 
 <style lang='scss'>
-
+    .container {
+      display: block;
+      position: absolute;
+      top: 3em;
+      padding: 1em;
+    }
 </style>
 
 <svelte:head>
