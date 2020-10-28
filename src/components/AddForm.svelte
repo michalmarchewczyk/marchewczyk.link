@@ -162,6 +162,7 @@
       cursor: pointer;
       overflow: hidden;
       opacity: 0.8;
+      user-select: none;
 
       &:hover {
         opacity: 1;
@@ -238,7 +239,7 @@
 
 <form on:submit={send}>
     <div class='text'>
-        <input id='url' type='text' bind:value={url} required placeholder=' '/>
+        <input id='url' type='text' bind:value={url} required placeholder=' ' autocomplete='off'/>
         <label for='url'>URL</label>
     </div>
 
@@ -249,7 +250,7 @@
 
     {#if customSlug}
         <div class='text'>
-            <input id='slug' type='text' bind:value={slug} required placeholder=' '/>
+            <input id='slug' type='text' bind:value={slug} required placeholder=' ' autocomplete='off'/>
             <label for='slug'>Slug</label>
         </div>
     {/if}

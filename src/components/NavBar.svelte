@@ -23,6 +23,7 @@
       width: 13em;
       margin-left: 0.2em;
       text-decoration: none;
+      user-select: none;
 
       img {
         position: absolute;
