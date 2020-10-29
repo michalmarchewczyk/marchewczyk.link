@@ -86,6 +86,7 @@
         font-family: Quicksand, sans-serif;
         font-weight: 500;
         transition: border 0.08s linear;
+        box-shadow: none;
       }
 
       input:focus {
@@ -127,6 +128,7 @@
           height: 1.4em;
           border: 2px solid black;
           float: left;
+          top: 0;
         }
         &::after {
           content: "";
