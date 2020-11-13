@@ -2,6 +2,7 @@
     import AddForm from '../components/AddForm.svelte';
     import GetForm from '../components/GetForm.svelte';
     import NavBar from '../components/NavBar.svelte';
+    import EditForm from '../components/EditForm.svelte';
 
 
     let view = 'add';
@@ -16,6 +17,7 @@
 <NavBar views={[
 		{name: 'add', text: 'Create'},
 		{name: 'get', text: 'Search'},
+		{name: 'edit', text: 'Edit'},
 		]}
         bind:view={view}/>
 
@@ -27,6 +29,10 @@
     {#if view === 'get'}
         <h2>Preview URL</h2>
         <GetForm/>
+    {/if}
+    {#if view === 'edit'}
+        <h2>Edit URL</h2>
+        <EditForm/>
     {/if}
 </div>
 
