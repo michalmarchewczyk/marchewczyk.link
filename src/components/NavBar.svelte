@@ -8,6 +8,21 @@
 
 </script>
 
+
+
+<nav>
+    <a href='https://marchewczyk.eu' class='nav_logo'><img src={logo} alt=''/></a>
+    <div>
+        {#each views as v}
+            <button on:click={() => view = v.name} class:selected={view === v.name}>
+                {v.text}
+            </button>
+        {/each}
+    </div>
+</nav>
+
+
+
 <style lang='scss'>
   nav {
     display: block;
@@ -96,14 +111,3 @@
 
   }
 </style>
-
-<nav>
-    <a href='https://marchewczyk.eu' class='nav_logo'><img src={logo} alt=''/></a>
-    <div>
-        {#each views as v}
-            <button on:click={() => view = v.name} class:selected={view === v.name}>
-                {v.text}
-            </button>
-        {/each}
-    </div>
-</nav>

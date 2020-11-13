@@ -25,6 +25,40 @@
     };
 </script>
 
+
+
+<form on:submit={send}>
+    <div class='text'>
+        <input id='slug' type='text' bind:value={slug} required placeholder=' ' autocomplete='off'/>
+        <label for='slug'>Slug</label>
+    </div>
+
+    <button on:click={send}>
+        <span>Search</span>
+        <svg width='32' height='24' id='form_send_arrow_right' viewBox='0 0 32 24' fill='none'
+             xmlns='http://www.w3.org/2000/svg'>
+            <line x1='-3.27835e-08' y1='12.25' x2='30' y2='12.25' stroke='black' stroke-width='1.5'/>
+            <line x1='19.5303' y1='1.46967' x2='30.5303' y2='12.4697' stroke='black' stroke-width='1.5'/>
+            <line y1='-0.75' x2='15.5563' y2='-0.75' transform='matrix(0.707107 -0.707107 -0.707107 -0.707107 19 22.5)'
+                  stroke='black' stroke-width='1.5'/>
+        </svg>
+    </button>
+
+</form>
+{#if message.type}
+    <div class='msg' transition:fade={{duration: 100}} class:msgError={message.type==='error'}>
+        {#if message.type === 'error'}
+            <span>Error</span>
+            <span>{message.msg}</span>
+        {:else if message.type === 'success'}
+            <span>Success</span>
+            <span>Found: <a href={message.msg}>{message.msg}</a></span>
+        {/if}
+    </div>
+{/if}
+
+
+
 <style lang='scss'>
   form {
     display: block;
@@ -183,33 +217,3 @@
 
   }
 </style>
-
-<form on:submit={send}>
-    <div class='text'>
-        <input id='slug' type='text' bind:value={slug} required placeholder=' ' autocomplete='off'/>
-        <label for='slug'>Slug</label>
-    </div>
-
-    <button on:click={send}>
-        <span>Search</span>
-        <svg width='32' height='24' id='form_send_arrow_right' viewBox='0 0 32 24' fill='none'
-             xmlns='http://www.w3.org/2000/svg'>
-            <line x1='-3.27835e-08' y1='12.25' x2='30' y2='12.25' stroke='black' stroke-width='1.5'/>
-            <line x1='19.5303' y1='1.46967' x2='30.5303' y2='12.4697' stroke='black' stroke-width='1.5'/>
-            <line y1='-0.75' x2='15.5563' y2='-0.75' transform='matrix(0.707107 -0.707107 -0.707107 -0.707107 19 22.5)'
-                  stroke='black' stroke-width='1.5'/>
-        </svg>
-    </button>
-
-</form>
-{#if message.type}
-    <div class='msg' transition:fade={{duration: 100}} class:msgError={message.type==='error'}>
-        {#if message.type === 'error'}
-            <span>Error</span>
-            <span>{message.msg}</span>
-        {:else if message.type === 'success'}
-            <span>Success</span>
-            <span>Found: <a href={message.msg}>{message.msg}</a></span>
-        {/if}
-    </div>
-{/if}

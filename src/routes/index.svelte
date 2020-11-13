@@ -7,22 +7,7 @@
     let view = 'add';
 </script>
 
-<style lang='scss'>
-  .container {
-    display: block;
-    position: absolute;
-    top: 3em;
-    padding: 1em;
-    width: calc(100vw - 2em);
 
-    h2 {
-      text-align: center;
-      font-family: Quicksand, sans-serif;
-      font-weight: 400;
-      font-size: 2em;
-    }
-  }
-</style>
 
 <svelte:head>
     <title>URL Shortener</title>
@@ -44,3 +29,22 @@
         <GetForm/>
     {/if}
 </div>
+
+
+
+<style lang='scss'>
+  .container {
+    display: block;
+    position: absolute;
+    top: 3em;
+    padding: 1em;
+    width: calc(100vw - 2em);
+
+    h2 {
+      text-align: center;
+      font-family: Quicksand, sans-serif;
+      font-weight: 400;
+      font-size: 2em;
+    }
+  }
+</style>
