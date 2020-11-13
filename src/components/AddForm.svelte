@@ -1,8 +1,10 @@
 <script>
     import {fade} from 'svelte/transition';
+
     let url = '';
     let customSlug = false;
     let slug = '';
+    let editable = false;
 
     let message = {type: null, msg: null};
     let msgTimeout;
@@ -12,6 +14,7 @@
         const data = {
             url,
             slug: customSlug ? slug : '',
+            editable,
         };
         const response = await fetch('/api', {
             method: 'POST',
@@ -21,10 +24,14 @@
             body: JSON.stringify(data),
         });
         const resData = await response.json();
+        console.log(resData);
         if (resData.messages) {
             message = {type: 'error', msg: resData.messages.join('; ')};
         } else {
             message = {type: 'success', msg: resData.slug};
+        }
+        if (resData.editToken) {
+            message = {...message, editToken: resData.editToken};
         }
         window.clearTimeout(msgTimeout);
         msgTimeout = setTimeout(() => {
@@ -32,7 +39,6 @@
         }, 10000);
     };
 </script>
-
 
 
 <form on:submit={send}>
@@ -46,6 +52,11 @@
         <label for='custom-slug'>Custom slug</label>
     </div>
 
+    <div class='checkbox'>
+        <input id='editable' type='checkbox' bind:checked={editable}/>
+        <label for='editable'>Editable</label>
+    </div>
+
     {#if customSlug}
         <div class='text'>
             <input id='slug' type='text' bind:value={slug} required placeholder=' ' autocomplete='off'/>
@@ -55,10 +66,12 @@
 
     <button on:click={send}>
         <span>Create</span>
-        <svg width="32" height="24" id="form_send_arrow_right" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="-3.27835e-08" y1="12.25" x2="30" y2="12.25" stroke="black" stroke-width="1.5"/>
-            <line x1="19.5303" y1="1.46967" x2="30.5303" y2="12.4697" stroke="black" stroke-width="1.5"/>
-            <line y1="-0.75" x2="15.5563" y2="-0.75" transform="matrix(0.707107 -0.707107 -0.707107 -0.707107 19 22.5)" stroke="black" stroke-width="1.5"/>
+        <svg width='32' height='24' id='form_send_arrow_right' viewBox='0 0 32 24' fill='none'
+             xmlns='http://www.w3.org/2000/svg'>
+            <line x1='-3.27835e-08' y1='12.25' x2='30' y2='12.25' stroke='black' stroke-width='1.5'/>
+            <line x1='19.5303' y1='1.46967' x2='30.5303' y2='12.4697' stroke='black' stroke-width='1.5'/>
+            <line y1='-0.75' x2='15.5563' y2='-0.75' transform='matrix(0.707107 -0.707107 -0.707107 -0.707107 19 22.5)'
+                  stroke='black' stroke-width='1.5'/>
         </svg>
     </button>
 
@@ -71,10 +84,10 @@
         {:else if message.type === 'success'}
             <span>Success</span>
             <span>Link: <a href={`http://${window.location.host}/${message.msg}`}>{window.location.host}/{message.msg}</a></span>
+            {#if message.editToken}<span>Edit token: {message.editToken}</span>{/if}
         {/if}
     </div>
 {/if}
-
 
 
 <style lang='scss'>
@@ -93,13 +106,14 @@
       width: 100%;
       height: 100%;
       margin-top: 1.8em;
+      clear: both;
 
       label {
         display: inline-block;
         position: absolute;
         background: white;
-        top: 0;
-        margin-top: -1.4em;
+        //top: 0;
+        margin-top: -3.4em;
         margin-left: 0.4em;
         padding: 0.1em 0.4em 0.1em 0.4em;
         font-size: 1em;
@@ -112,7 +126,7 @@
       }
 
       input:placeholder-shown:not(:focus) + label {
-        margin-top: 0;
+        margin-top: -1.9em;
         font-size: 1.1em;
         margin-left: 0.1em;
       }
@@ -147,14 +161,15 @@
       position: relative;
       left: 0;
       top: 0;
-      width: 100%;
+      width: auto;
       height: 100%;
-      margin-top: 1em;
-      margin-bottom: 2em;
+      margin: 1em 2em 2em 0;
+      float: left;
 
       input {
         display: none;
       }
+
       label {
         padding-left: 1.2em;
         line-height: 1.5em;
@@ -174,6 +189,7 @@
           float: left;
           top: 0;
         }
+
         &::after {
           content: "";
           display: block;
@@ -185,6 +201,7 @@
           float: left;
         }
       }
+
       input:checked + label {
         &::after {
           background: black;
@@ -209,6 +226,7 @@
       overflow: hidden;
       opacity: 0.8;
       user-select: none;
+      clear: both;
 
       &:hover {
         opacity: 1;
@@ -265,15 +283,18 @@
     font-family: Quicksand, sans-serif;
     padding: 0.8em;
     border: 2px solid black;
+
     span {
       font-size: 1.2em;
       font-weight: 500;
+      display: block;
+      margin-bottom: 0.2em;
+
       &:first-child {
         display: block;
         font-weight: 700;
-        float: none;
-        margin-bottom: 0.2em;
       }
+
       a {
         color: black;
         font-weight: 600;

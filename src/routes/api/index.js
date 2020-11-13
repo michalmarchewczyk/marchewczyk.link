@@ -1,11 +1,12 @@
 import ShortURL from './_database';
 
 export function post(req, res) {
-    const {url, slug} = req.body;
+    const {url, slug, editable} = req.body;
     
     const newURL = new ShortURL();
     newURL.url = url;
     if(slug) newURL.slug = slug;
+    newURL.editToken = editable;
 
     newURL.save((err) => {
         if(err) {

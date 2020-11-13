@@ -24,9 +24,7 @@ const ShortURL = new mongoose.Schema({
         minlength: [2, 'slug is too short'],
         maxlength: [50, 'slug is too long'],
         validate: {
-            validator: (v) => {
-                return validator.isAlphanumeric(v);
-            },
+            validator: (v) => validator.isAlphanumeric(v),
             message: props => `slug must contain only alphanumeric characters`,
         }
     },
@@ -39,11 +37,20 @@ const ShortURL = new mongoose.Schema({
             return r.test(v) ? v : `http://${v}`;
         },
         validate: {
-            validator: (v) => {
-                return validator.isURL(v);
-            },
+            validator: (v) => validator.isURL(v),
             message: props => `${props.value} is not a valid url`,
         },
+    },
+    editToken: {
+        type: String,
+        default: null,
+        set: (v) => {
+            if(v){
+                const r = cryptoRandomString({length: 20, type: 'alphanumeric'});
+                return r;
+            }
+            return null;
+        }
     },
     date: { type: Date, default: Date.now },
 });
