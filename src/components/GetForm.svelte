@@ -12,7 +12,9 @@
             method: 'GET',
         });
         if (response.status !== 200) {
-            message = {type: 'error', msg: 'Not found'};
+            message = {type: 'error', msg: 'Error'};
+            if(response.status === 429) message = {...message, msg: 'Request limit exceeded, try again in 10 minutes'};
+            if(response.status === 404) message = {...message, msg: 'Not found'};
         } else {
             const resData = await response.json();
             message = {type: 'success', msg: resData.url};

@@ -23,15 +23,18 @@
             },
             body: JSON.stringify(data),
         });
-        const resData = await response.json();
-        console.log(resData);
-        if (resData.messages) {
-            message = {type: 'error', msg: resData.messages.join('; ')};
-        } else {
-            message = {type: 'success', msg: resData.slug};
-        }
-        if (resData.editToken) {
-            message = {...message, editToken: resData.editToken};
+        if(response.status === 429){
+            message = {type: 'error', msg: 'Request limit exceeded, try again in 10 minutes'};
+        }else{
+            const resData = await response.json();
+            if (resData.messages) {
+                message = {type: 'error', msg: resData.messages.join('; ')};
+            } else {
+                message = {type: 'success', msg: resData.slug};
+            }
+            if (resData.editToken) {
+                message = {...message, editToken: resData.editToken};
+            }
         }
         window.clearTimeout(msgTimeout);
         msgTimeout = setTimeout(() => {
