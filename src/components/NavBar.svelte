@@ -1,5 +1,5 @@
 <script>
-    import logo from '../static/images/logo_400x400.png';
+    import logo from '../static/images/logotype-link.svg';
 
 
     export let views = [];
@@ -21,41 +21,18 @@
       position: relative;
       height: 3em;
       width: 13em;
-      margin-left: 0.2em;
+      margin-left: 0;
       text-decoration: none;
       user-select: none;
 
       img {
         position: absolute;
-        height: 2em;
-        width: 2em;
-        top: 0.4em;
-        left: 0.6em;
+        height: 2.4em;
+        width: 14em;
+        top: 0.3em;
+        left: 0em;
       }
 
-      span.logo_text {
-        font-family: Poiret One, sans-serif;
-        color: #222222;
-        text-decoration: none;
-        height: 100%;
-        line-height: 2.2em;
-        position: absolute;
-        font-size: 1.3em;
-        font-weight: 600;
-        left: 2.6em;
-        span {
-          color: #888888;
-          transition: color 0.05s linear;
-        }
-      }
-
-      &:hover {
-        span.logo_text {
-          span {
-            color: white;
-          }
-        }
-      }
     }
 
     div{
@@ -121,7 +98,7 @@
 </style>
 
 <nav>
-    <a href='https://marchewczyk.eu' class='nav_logo'><img src={logo} alt=''/><span class='logo_text'>Marchewczyk<span>.link</span></span></a>
+    <a href='https://marchewczyk.eu' class='nav_logo'><img src={logo} alt=''/></a>
     <div>
         {#each views as v}
             <button on:click={() => view = v.name} class:selected={view === v.name}>
