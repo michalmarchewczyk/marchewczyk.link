@@ -27,12 +27,10 @@
             if(response.status === 403) message = {...message, msg: 'Wrong token'};
             if(response.status === 400){
                 const resData = await response.json();
-                console.log(resData);
                 message = {type: 'error', msg: resData.messages.join('; ')};
             }
         } else {
             const resData = await response.json();
-            console.log(resData);
             message = {type: 'success', msg: resData.url};
         }
         window.clearTimeout(msgTimeout);
@@ -62,7 +60,7 @@
     </div>
 
     <button on:click={send}>
-        <span>Search</span>
+        <span>Edit</span>
         <svg width='32' height='24' id='form_send_arrow_right' viewBox='0 0 32 24' fill='none'
              xmlns='http://www.w3.org/2000/svg'>
             <line x1='-3.27835e-08' y1='12.25' x2='30' y2='12.25' stroke='black' stroke-width='1.5'/>
