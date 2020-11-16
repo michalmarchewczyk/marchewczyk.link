@@ -24,7 +24,7 @@ const ShortURL = new mongoose.Schema({
         minlength: [2, 'slug is too short'],
         maxlength: [50, 'slug is too long'],
         validate: {
-            validator: (v) => validator.isAlphanumeric(v),
+            validator: (v) => validator.isSlug(v.toLowerCase()),
             message: props => `slug must contain only alphanumeric characters`,
         }
     },
