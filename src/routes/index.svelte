@@ -49,8 +49,10 @@
     h2 {
       text-align: center;
       font-family: Quicksand, sans-serif;
-      font-weight: 400;
-      font-size: 2em;
+      font-weight: 300;
+      font-size: 1.8em;
+      margin-bottom: 1.5em;
+      color: white;
     }
   }
 </style>
